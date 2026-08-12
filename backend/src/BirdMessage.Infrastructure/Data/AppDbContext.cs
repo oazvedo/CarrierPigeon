@@ -7,6 +7,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 {
     public DbSet<User> Users => Set<User>();
     public DbSet<Message> Messages => Set<Message>();
+    public DbSet<Bird> Birds => Set<Bird>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
