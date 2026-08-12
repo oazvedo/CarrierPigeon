@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BirdMessage.API/BirdMessage.API.csproj" />
+    <Project Path="src/BirdMessage.Application/BirdMessage.Application.csproj" />
+    <Project Path="src/BirdMessage.Domain/BirdMessage.Domain.csproj" />
+    <Project Path="src/BirdMessage.Infrastructure/BirdMessage.Infrastructure.csproj" />
+  </Folder>
+</Solution>

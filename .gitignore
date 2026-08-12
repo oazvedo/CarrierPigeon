@@ -1,0 +1,17 @@
+## .NET
+bin/
+obj/
+*.user
+
+## Visual Studio / Rider
+.vs/
+.idea/
+
+## Node
+node_modules/
+dist/
+build/
+
+## Env
+.env
+.env.local
