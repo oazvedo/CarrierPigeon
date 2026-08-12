@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: birdmessage-postgres
+    environment:
+      POSTGRES_DB: birdmessage
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - birdmessage-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  birdmessage-postgres-data:
