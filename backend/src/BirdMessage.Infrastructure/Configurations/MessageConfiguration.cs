@@ -16,5 +16,10 @@ public class MessageConfiguration : IEntityTypeConfiguration<Message>
         builder.Property(m => m.Text).HasColumnName("text");
         builder.Property(m => m.AttachmentUrl).HasColumnName("attachment_url");
         builder.Property(m => m.AttachmentType).HasColumnName("attachment_type");
+
+        builder.Property(m => m.SenderLatitude).HasColumnName("sender_latitude").HasPrecision(9, 6);
+        builder.Property(m => m.SenderLongitude).HasColumnName("sender_longitude").HasPrecision(9, 6);
+        builder.Property(m => m.ReceiverLatitude).HasColumnName("receiver_latitude").HasPrecision(9, 6);
+        builder.Property(m => m.ReceiverLongitude).HasColumnName("receiver_longitude").HasPrecision(9, 6);
     }
 }
