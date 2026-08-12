@@ -1,7 +1,5 @@
-using BirdMessage.Domain.Interfaces;
-using BirdMessage.Infrastructure.Data;
-using BirdMessage.Infrastructure.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
+using BirdMessage.Application;
+using BirdMessage.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,10 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+builder.Services.AddInfraModule(builder.Configuration);
+builder.Services.AddApplicationModule();
 
 var app = builder.Build();
 
