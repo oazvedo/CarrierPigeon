@@ -16,6 +16,7 @@ public static class InfraModule
 
         services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
         services.AddScoped<IBirdRepository, BirdRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }
