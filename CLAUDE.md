@@ -13,3 +13,10 @@ Allowed types: `feat`, `fix`, `chore`, `refactor`, `docs`, `test`, `style`, `per
 - Summary in English, lowercase after the colon, no trailing period.
 - Body (when present) explains the motivation/context, not a restatement of the diff.
 - Never add a `Co-Authored-By` trailer or any AI attribution line to commits in this repo.
+- Always create a new branch, for feat, fix or etc. commit, publish de branch and open a PR for dev branch
+- When finish a commit, goes back to dev and update the local branch.
+
+
+
+- Coding rules
+- avoid comments 

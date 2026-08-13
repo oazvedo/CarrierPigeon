@@ -10,4 +10,8 @@ public class Message
     public string Text { get; set; } = string.Empty;
     public string? AttachmentUrl { get; set; }
     public AttachmentType? AttachmentType { get; set; }
+    public decimal SenderLatitude { get; set; }
+    public decimal SenderLongitude { get; set; }
+    public decimal ReceiverLatitude { get; set; }
+    public decimal ReceiverLongitude { get; set; }
 }

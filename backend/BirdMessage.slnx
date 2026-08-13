@@ -5,4 +5,7 @@
     <Project Path="src/BirdMessage.Domain/BirdMessage.Domain.csproj" />
     <Project Path="src/BirdMessage.Infrastructure/BirdMessage.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/BirdMessage.Tests/BirdMessage.Tests.csproj" />
+  </Folder>
 </Solution>
