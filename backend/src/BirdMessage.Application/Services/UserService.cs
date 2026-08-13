@@ -5,10 +5,11 @@ using BirdMessage.Domain.Interfaces;
 
 namespace BirdMessage.Application.Services
 {
-    public class UserService(IUserRepository repository) : IUserService
+    public class UserService(IUserRepository repository, IPasswordHasher passwordHasher) : IUserService
     {
         public async Task<User> CreateAsync(User user, CancellationToken cancellationToken = default)
         {
+            user.Password = passwordHasher.Hash(user.Password);
             user.CreatedAt = DateTime.UtcNow;
             user.UpdatedAt = DateTime.UtcNow;
             await repository.AddAsync(user);
@@ -37,6 +38,7 @@ namespace BirdMessage.Application.Services
 
         public async Task UpdateAsync(User user, CancellationToken cancellationToken = default)
         {
+            user.Password = passwordHasher.Hash(user.Password);
             user.UpdatedAt = DateTime.UtcNow;
             repository.Update(user);
             await repository.SaveChangesAsync();
