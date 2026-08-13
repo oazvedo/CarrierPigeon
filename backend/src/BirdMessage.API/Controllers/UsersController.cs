@@ -38,5 +38,24 @@ namespace BirdMessage.API.Controllers
             var response = user.ToResponseDto();
             return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
         }
+
+        [HttpPut("{id:guid}")]
+        public async Task <IActionResult> Update(Guid id, UpdateUserRequestDto dto, CancellationToken cancellationToken)
+        {
+            var user = await userService.GetByIdAsync(id, cancellationToken);
+            if (user is null) return NotFound();
+
+            dto.ApplyTo(user);
+            await userService.UpdateAsync(user);
+            return NoContent();
+        }
+
+
+        [HttpDelete("{id:guid}")]
+        public async Task <IActionResult> Delete(Guid id, CancellationToken cancellationToken)
+        {
+             await userService.DeleteAsync(id, cancellationToken);
+            return NoContent();
+        }
     }
 }
