@@ -10,5 +10,5 @@ namespace BirdMessage.Application.Dto
 
     public record UpdateUserRequestDto(string name, string email, string password, Role role);
 
-    public record UserResponseDto(Guid id, string name, string email, DateTime createdAt, DateTime updatedAt, Role role);
+    public record UserResponseDto(Guid Id, string name, string email, DateTime createdAt, DateTime updatedAt, Role role);
 }
