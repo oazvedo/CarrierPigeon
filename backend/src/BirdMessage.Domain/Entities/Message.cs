@@ -14,4 +14,5 @@ public class Message
     public decimal SenderLongitude { get; set; }
     public decimal ReceiverLatitude { get; set; }
     public decimal ReceiverLongitude { get; set; }
+    public DateTime CreatedAt {get; set;}
 }
