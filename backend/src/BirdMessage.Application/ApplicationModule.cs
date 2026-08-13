@@ -10,6 +10,7 @@ public static class ApplicationModule
     {
         services.AddScoped<IDeliveryEstimationService, DeliveryEstimationService>();
         services.AddScoped<IBirdService, BirdService>();
+        services.AddScoped<IUserService, UserService>();
 
         return services;
     }
