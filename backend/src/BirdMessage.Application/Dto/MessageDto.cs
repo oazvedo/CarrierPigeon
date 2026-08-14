@@ -10,10 +10,6 @@ public record MessageResponseDto(
     string Text,
     string? AttachmentUrl,
     AttachmentType? AttachmentType,
-    decimal SenderLatitude,
-    decimal SenderLongitude,
-    decimal ReceiverLatitude,
-    decimal ReceiverLongitude,
     decimal Distance,
     decimal EstimatedDeliveryMinutes,
     DateTime CreatedAt);
