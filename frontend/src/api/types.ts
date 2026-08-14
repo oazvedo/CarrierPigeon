@@ -50,6 +50,7 @@ export interface MessageResponse {
   id: string;
   senderId: string;
   receiverId: string;
+  birdId: string;
   text: string;
   attachmentUrl: string | null;
   attachmentType: AttachmentType | null;
@@ -57,19 +58,44 @@ export interface MessageResponse {
   senderLongitude: number;
   receiverLatitude: number;
   receiverLongitude: number;
+  distance: number;
+  estimatedDeliveryMinutes: number;
   createdAt: string;
 }
 
 export interface CreateMessageRequest {
   senderId: string;
   receiverId: string;
+  birdId: string;
   text: string;
   attachmentUrl: string | null;
   attachmentType: AttachmentType | null;
-  senderLatitude: number;
-  senderLongitude: number;
-  receiverLatitude: number;
-  receiverLongitude: number;
+}
+
+export interface AddressResponse {
+  id: string;
+  userId: string;
+  cep: string;
+  number: string | null;
+  street: string | null;
+  neighborhood: string | null;
+  local: string | null;
+  uf: string | null;
+  state: string | null;
+  region: string | null;
+  ddd: string | null;
+}
+
+export interface CreateAddressRequest {
+  userId: string;
+  cep: string;
+  number: string | null;
+}
+
+export interface UpdateAddressRequest {
+  userId: string;
+  cep: string;
+  number: string | null;
 }
 
 export interface PaginatedResult<T> {
