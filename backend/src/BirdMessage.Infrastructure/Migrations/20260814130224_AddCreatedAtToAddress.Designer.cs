@@ -3,6 +3,7 @@ using System;
 using BirdMessage.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BirdMessage.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260814130224_AddCreatedAtToAddress")]
+    partial class AddCreatedAtToAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,10 +51,6 @@ namespace BirdMessage.Infrastructure.Migrations
                     b.Property<string>("Neighborhood")
                         .HasColumnType("text")
                         .HasColumnName("neighborhood");
-
-                    b.Property<string>("Number")
-                        .HasColumnType("text")
-                        .HasColumnName("number");
 
                     b.Property<string>("Region")
                         .HasColumnType("text")
@@ -130,23 +129,9 @@ namespace BirdMessage.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("attachment_url");
 
-                    b.Property<Guid>("BirdId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("bird_id");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
-
-                    b.Property<decimal>("Distance")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("numeric(10,2)")
-                        .HasColumnName("distance");
-
-                    b.Property<decimal>("EstimatedDeliveryMinutes")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("numeric(10,2)")
-                        .HasColumnName("estimated_delivery_minutes");
 
                     b.Property<Guid>("ReceiverId")
                         .HasColumnType("uuid")

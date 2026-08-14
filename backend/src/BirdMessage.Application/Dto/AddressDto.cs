@@ -4,6 +4,7 @@ public record AddressResponseDto(
     Guid Id,
     Guid UserId,
     string Cep,
+    string? Number,
     string? Street,
     string? Neighborhood,
     string? Local,
@@ -14,11 +15,13 @@ public record AddressResponseDto(
 
 public record CreateAddressRequestDto(
     Guid UserId,
-    string Cep
+    string Cep,
+    string? Number
 );
 
 public record UpdateAddressRequestDto(
     string Cep,
+    string? Number,
     string? Street,
     string? Neighborhood,
     string? Local,

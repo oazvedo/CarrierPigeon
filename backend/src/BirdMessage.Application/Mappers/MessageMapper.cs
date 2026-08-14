@@ -11,6 +11,7 @@ public static class MessageMapper
             message.Id,
             message.SenderId,
             message.ReceiverId,
+            message.BirdId,
             message.Text,
             message.AttachmentUrl,
             message.AttachmentType,
@@ -18,6 +19,8 @@ public static class MessageMapper
             message.SenderLongitude,
             message.ReceiverLatitude,
             message.ReceiverLongitude,
+            message.Distance,
+            message.EstimatedDeliveryMinutes,
             message.CreatedAt);
 
     public static PaginatedResult<MessageResponseDto> ToResponseDto(this PaginatedResult<Message> result)
@@ -28,13 +31,10 @@ public static class MessageMapper
         {
             SenderId = dto.SenderId,
             ReceiverId = dto.ReceiverId,
+            BirdId = dto.BirdId,
             Text = dto.Text,
             AttachmentUrl = dto.AttachmentUrl,
-            AttachmentType = dto.AttachmentType,
-            SenderLatitude = dto.SenderLatitude,
-            SenderLongitude = dto.SenderLongitude,
-            ReceiverLatitude = dto.ReceiverLatitude,
-            ReceiverLongitude = dto.ReceiverLongitude
+            AttachmentType = dto.AttachmentType
         };
 
     public static void ApplyTo(this UpdateMessageRequestDto dto, Message message)

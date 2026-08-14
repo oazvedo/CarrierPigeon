@@ -30,7 +30,12 @@ namespace BirdMessage.Application.Externals
                 DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
             });
 
-            return result ?? throw new InvalidOperationException("Unable to deserialize CEP response.");
+            if (result is null || string.IsNullOrWhiteSpace(result.Cep))
+            {
+                throw new InvalidOperationException($"CEP '{normalizedCep}' not found.");
+            }
+
+            return result;
         }
     }
 }

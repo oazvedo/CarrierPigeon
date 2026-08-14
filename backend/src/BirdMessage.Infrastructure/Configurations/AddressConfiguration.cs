@@ -13,6 +13,7 @@ public class AddressConfiguration : IEntityTypeConfiguration<Address>
         builder.Property(a => a.Id).HasColumnName("id");
         builder.Property(a => a.UserId).HasColumnName("user_id");
         builder.Property(a => a.Cep).HasColumnName("cep");
+        builder.Property(a => a.Number).HasColumnName("number");
         builder.Property(a => a.Street).HasColumnName("street");
         builder.Property(a => a.Neighborhood).HasColumnName("neighborhood");
         builder.Property(a => a.Local).HasColumnName("local");

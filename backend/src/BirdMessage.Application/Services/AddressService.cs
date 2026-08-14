@@ -61,5 +61,8 @@ namespace BirdMessage.Application.Services
             addressRepository.Delete(address);
             await addressRepository.SaveChangesAsync(cancellationToken);
         }
+
+        public Task<Address?> GetLatestByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
+            => addressRepository.GetLatestByUserIdAsync(userId, cancellationToken);
     }
 }

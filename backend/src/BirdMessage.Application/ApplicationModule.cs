@@ -19,6 +19,7 @@ public static class ApplicationModule
 
         // externals calls
         services.AddHttpClient<ICepService, CepService>();
+        services.AddHttpClient<IGeocodingService, GeocodingService>();
         return services;
     }
 }

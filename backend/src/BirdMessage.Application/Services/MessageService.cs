@@ -1,3 +1,5 @@
+using BirdMessage.Application.Externals.Interfaces;
+using BirdMessage.Application.Mappers;
 using BirdMessage.Application.Services.Interface;
 using BirdMessage.Domain.Common;
 using BirdMessage.Domain.Entities;
@@ -5,7 +7,12 @@ using BirdMessage.Domain.Interfaces;
 
 namespace BirdMessage.Application.Services
 {
-    public class MessageService(IMessageRepository messageRepository) : IMessageService
+    public class MessageService(
+        IMessageRepository messageRepository,
+        IAddressService addressService,
+        IGeocodingService geocodingService,
+        IBirdService birdService,
+        IDeliveryEstimationService deliveryEstimationService) : IMessageService
     {
         public Task<Message?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
             => messageRepository.GetByIdAsync(id, cancellationToken);
@@ -16,6 +23,30 @@ namespace BirdMessage.Application.Services
         public async Task<Message> CreateAsync(Message message, CancellationToken cancellationToken = default)
         {
             message.CreatedAt = DateTime.UtcNow;
+
+            var bird = await birdService.GetByIdAsync(message.BirdId, cancellationToken)
+                ?? throw new InvalidOperationException($"Bird '{message.BirdId}' not found.");
+
+            var senderLatestAddress = await addressService.GetLatestByUserIdAsync(message.SenderId, cancellationToken);
+            var receiverLatestAddress = await addressService.GetLatestByUserIdAsync(message.ReceiverId, cancellationToken);
+
+            if (senderLatestAddress is not null && receiverLatestAddress is not null)
+            {
+                var route = await geocodingService.GetRouteAsync(
+                    senderLatestAddress.ToGeocodingRoutePoint(),
+                    receiverLatestAddress.ToGeocodingRoutePoint(),
+                    cancellationToken);
+
+                message.SenderLatitude = route.Origin.Latitude;
+                message.SenderLongitude = route.Origin.Longitude;
+                message.ReceiverLatitude = route.Destination.Latitude;
+                message.ReceiverLongitude = route.Destination.Longitude;
+                message.Distance = route.DistanceKm;
+
+                var duration = deliveryEstimationService.CalculateDuration(message.Distance, bird.Velocity);
+                message.EstimatedDeliveryMinutes = (decimal)duration.TotalMinutes;
+            }
+
             await messageRepository.AddAsync(message, cancellationToken);
             await messageRepository.SaveChangesAsync(cancellationToken);
             return message;
