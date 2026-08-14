@@ -6,6 +6,7 @@ public record MessageResponseDto(
     Guid Id,
     Guid SenderId,
     Guid ReceiverId,
+    Guid BirdId,
     string Text,
     string? AttachmentUrl,
     AttachmentType? AttachmentType,
@@ -13,11 +14,14 @@ public record MessageResponseDto(
     decimal SenderLongitude,
     decimal ReceiverLatitude,
     decimal ReceiverLongitude,
+    decimal Distance,
+    decimal EstimatedDeliveryMinutes,
     DateTime CreatedAt);
 
 public record CreateMessageRequestDto(
     Guid SenderId,
     Guid ReceiverId,
+    Guid BirdId,
     string Text,
     string? AttachmentUrl,
     AttachmentType? AttachmentType);

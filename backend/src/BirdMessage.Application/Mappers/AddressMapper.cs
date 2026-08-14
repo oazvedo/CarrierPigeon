@@ -11,6 +11,7 @@ public static class AddressMapper
             address.Id,
             address.UserId,
             address.Cep,
+            address.Number,
             address.Street,
             address.Neighborhood,
             address.Local,
@@ -27,12 +28,27 @@ public static class AddressMapper
         {
             Id = Guid.NewGuid(),
             UserId = dto.UserId,
-            Cep = dto.Cep
+            Cep = dto.Cep,
+            Number = dto.Number
         };
+
+    public static GeocodingRoutePointDto ToGeocodingRoutePoint(this Address address)
+    {
+        var cepPrefix = address.Cep.Split('-')[0];
+
+        var nameParts = new[] { $"{address.Street} {address.Number}", address.Neighborhood, address.Local, address.State, cepPrefix }
+            .Where(part => !string.IsNullOrWhiteSpace(part))
+            .Select(part => part!.Trim().Replace(' ', '-'))
+            .Append("BRA");
+
+        var name = string.Join(", ", nameParts);
+        return new GeocodingRoutePointDto(name, "Brazil");
+    }
 
     public static void ApplyTo(this UpdateAddressRequestDto dto, Address address)
     {
         address.Cep = dto.Cep;
+        address.Number = dto.Number;
         address.Street = dto.Street;
         address.Neighborhood = dto.Neighborhood;
         address.Local = dto.Local;
