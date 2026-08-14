@@ -35,11 +35,13 @@ public static class AddressMapper
     public static GeocodingRoutePointDto ToGeocodingRoutePoint(this Address address)
     {
         var cepPrefix = address.Cep.Split('-')[0];
+        var streetLine = string.IsNullOrWhiteSpace(address.Number)
+            ? address.Street
+            : $"{address.Street}, {address.Number}";
 
-        var nameParts = new[] { $"{address.Street} {address.Number}", address.Neighborhood, address.Local, address.State, cepPrefix }
+        var nameParts = new[] { streetLine, address.Neighborhood, address.Local, address.Uf, cepPrefix }
             .Where(part => !string.IsNullOrWhiteSpace(part))
-            .Select(part => part!.Trim().Replace(' ', '-'))
-            .Append("BRA");
+            .Select(part => part!.Trim());
 
         var name = string.Join(", ", nameParts);
         return new GeocodingRoutePointDto(name, "Brazil");
@@ -47,14 +49,8 @@ public static class AddressMapper
 
     public static void ApplyTo(this UpdateAddressRequestDto dto, Address address)
     {
+        address.UserId = dto.UserId;
         address.Cep = dto.Cep;
         address.Number = dto.Number;
-        address.Street = dto.Street;
-        address.Neighborhood = dto.Neighborhood;
-        address.Local = dto.Local;
-        address.Uf = dto.Uf;
-        address.State = dto.State;
-        address.Region = dto.Region;
-        address.DDD = dto.DDD;
     }
 }

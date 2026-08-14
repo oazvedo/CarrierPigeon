@@ -15,6 +15,10 @@ public static class MessageMapper
             message.Text,
             message.AttachmentUrl,
             message.AttachmentType,
+            message.SenderLatitude,
+            message.SenderLongitude,
+            message.ReceiverLatitude,
+            message.ReceiverLongitude,
             message.Distance,
             message.EstimatedDeliveryMinutes,
             message.CreatedAt);
