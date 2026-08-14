@@ -72,6 +72,10 @@ namespace BirdMessage.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("attachment_url");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
                     b.Property<Guid>("ReceiverId")
                         .HasColumnType("uuid")
                         .HasColumnName("receiver_id");
