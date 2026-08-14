@@ -17,5 +17,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.CreatedAt).HasColumnName("created_at");
         builder.Property(u => u.UpdatedAt).HasColumnName("updated_at");
         builder.Property(u => u.Role).HasColumnName("role");
+
+        builder.HasMany(u => u.Addresses)
+            .WithOne()
+            .HasForeignKey(a => a.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

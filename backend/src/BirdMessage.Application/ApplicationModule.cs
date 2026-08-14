@@ -1,3 +1,5 @@
+using BirdMessage.Application.Externals;
+using BirdMessage.Application.Externals.Interfaces;
 using BirdMessage.Application.Services;
 using BirdMessage.Application.Services.Interface;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +14,11 @@ public static class ApplicationModule
         services.AddScoped<IBirdService, BirdService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IMessageService, MessageService>();
+        services.AddScoped<IAddressService, AddressService>();
 
+
+        // externals calls
+        services.AddHttpClient<ICepService, CepService>();
         return services;
     }
 }

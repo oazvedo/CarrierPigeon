@@ -19,6 +19,7 @@ public static class InfraModule
         services.AddScoped<IBirdRepository, BirdRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IMessageRepository, MessageRepository>();
+        services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
 
         return services;
