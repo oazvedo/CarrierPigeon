@@ -2,6 +2,8 @@ import { useState, type FormEvent } from "react";
 import { Button } from "../components/ui/Button";
 import { EmptyState } from "../components/ui/EmptyState";
 import { FormField } from "../components/ui/FormField";
+import { IconButton } from "../components/ui/IconButton";
+import { DeleteIcon, EditIcon } from "../components/ui/icons";
 import { Modal } from "../components/ui/Modal";
 import { Pagination } from "../components/ui/Pagination";
 import { usePaginatedResource } from "../hooks/usePaginatedResource";
@@ -110,12 +112,10 @@ export function BirdsPage() {
                     {bird.velocity}
                   </td>
                   <td className="table-actions">
-                    <Button variant="ghost" onClick={() => openEdit(bird)}>
-                      Edit
-                    </Button>
-                    <Button variant="ghost" onClick={() => handleDelete(bird)}>
-                      Delete
-                    </Button>
+                    <span className="table-actions-group">
+                      <IconButton tone="edit" label="Edit bird" icon={<EditIcon />} onClick={() => openEdit(bird)} />
+                      <IconButton tone="danger" label="Delete bird" icon={<DeleteIcon />} onClick={() => handleDelete(bird)} />
+                    </span>
                   </td>
                 </tr>
               ))}
@@ -129,14 +129,27 @@ export function BirdsPage() {
       {(creating || editing) && (
         <Modal title={editing ? "Edit bird" : "New bird"} onClose={closeModal}>
           <form className="form" onSubmit={handleSubmit}>
-            <FormField label="Name" htmlFor="bird-name">
-              <input
-                id="bird-name"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-              />
-            </FormField>
+            <div className="form-row">
+              <FormField label="Name" htmlFor="bird-name">
+                <input
+                  id="bird-name"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+              </FormField>
+              <FormField label="Velocity (km/h)" htmlFor="bird-velocity">
+                <input
+                  id="bird-velocity"
+                  type="number"
+                  required
+                  min={0}
+                  step="0.1"
+                  value={form.velocity}
+                  onChange={(e) => setForm({ ...form, velocity: e.target.value })}
+                />
+              </FormField>
+            </div>
             <FormField label="Description" htmlFor="bird-description">
               <textarea
                 id="bird-description"
@@ -144,17 +157,6 @@ export function BirdsPage() {
                 rows={3}
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
-              />
-            </FormField>
-            <FormField label="Velocity (km/h)" htmlFor="bird-velocity">
-              <input
-                id="bird-velocity"
-                type="number"
-                required
-                min={0}
-                step="0.1"
-                value={form.velocity}
-                onChange={(e) => setForm({ ...form, velocity: e.target.value })}
               />
             </FormField>
 

@@ -3,6 +3,8 @@ import { Badge } from "../components/ui/Badge";
 import { Button } from "../components/ui/Button";
 import { EmptyState } from "../components/ui/EmptyState";
 import { FormField } from "../components/ui/FormField";
+import { IconButton } from "../components/ui/IconButton";
+import { DeleteIcon, EditIcon } from "../components/ui/icons";
 import { Modal } from "../components/ui/Modal";
 import { Pagination } from "../components/ui/Pagination";
 import { usePaginatedResource } from "../hooks/usePaginatedResource";
@@ -108,12 +110,10 @@ export function UsersPage() {
                     <Badge tone={user.role === "Admin" ? "accent" : "neutral"}>{user.role}</Badge>
                   </td>
                   <td className="table-actions">
-                    <Button variant="ghost" onClick={() => openEdit(user)}>
-                      Edit
-                    </Button>
-                    <Button variant="ghost" onClick={() => handleDelete(user)}>
-                      Delete
-                    </Button>
+                    <span className="table-actions-group">
+                      <IconButton tone="edit" label="Edit user" icon={<EditIcon />} onClick={() => openEdit(user)} />
+                      <IconButton tone="danger" label="Delete user" icon={<DeleteIcon />} onClick={() => handleDelete(user)} />
+                    </span>
                   </td>
                 </tr>
               ))}
@@ -127,44 +127,48 @@ export function UsersPage() {
       {(creating || editing) && (
         <Modal title={editing ? "Edit user" : "New user"} onClose={closeModal}>
           <form className="form" onSubmit={handleSubmit}>
-            <FormField label="Name" htmlFor="user-name">
-              <input
-                id="user-name"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-              />
-            </FormField>
-            <FormField label="Email" htmlFor="user-email">
-              <input
-                id="user-email"
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-              />
-            </FormField>
-            <FormField label="Password" htmlFor="user-password">
-              <input
-                id="user-password"
-                type="password"
-                required
-                minLength={6}
-                value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
-                placeholder={editing ? "Re-enter password to confirm changes" : undefined}
-              />
-            </FormField>
-            <FormField label="Role" htmlFor="user-role">
-              <select
-                id="user-role"
-                value={form.role}
-                onChange={(e) => setForm({ ...form, role: e.target.value as Role })}
-              >
-                <option value="User">User</option>
-                <option value="Admin">Admin</option>
-              </select>
-            </FormField>
+            <div className="form-row">
+              <FormField label="Name" htmlFor="user-name">
+                <input
+                  id="user-name"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+              </FormField>
+              <FormField label="Email" htmlFor="user-email">
+                <input
+                  id="user-email"
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                />
+              </FormField>
+            </div>
+            <div className="form-row">
+              <FormField label="Password" htmlFor="user-password">
+                <input
+                  id="user-password"
+                  type="password"
+                  required
+                  minLength={6}
+                  value={form.password}
+                  onChange={(e) => setForm({ ...form, password: e.target.value })}
+                  placeholder={editing ? "Re-enter password to confirm changes" : undefined}
+                />
+              </FormField>
+              <FormField label="Role" htmlFor="user-role">
+                <select
+                  id="user-role"
+                  value={form.role}
+                  onChange={(e) => setForm({ ...form, role: e.target.value as Role })}
+                >
+                  <option value="User">User</option>
+                  <option value="Admin">Admin</option>
+                </select>
+              </FormField>
+            </div>
 
             {formError && <p className="form-error">{formError}</p>}
 

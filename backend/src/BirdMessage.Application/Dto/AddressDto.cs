@@ -20,12 +20,6 @@ public record CreateAddressRequestDto(
 );
 
 public record UpdateAddressRequestDto(
+    Guid UserId,
     string Cep,
-    string? Number,
-    string? Street,
-    string? Neighborhood,
-    string? Local,
-    string? Uf,
-    string? State,
-    string? Region,
-    string? DDD);
+    string? Number);
