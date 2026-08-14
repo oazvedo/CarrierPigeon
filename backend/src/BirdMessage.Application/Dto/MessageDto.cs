@@ -20,10 +20,6 @@ public record CreateMessageRequestDto(
     Guid ReceiverId,
     string Text,
     string? AttachmentUrl,
-    AttachmentType? AttachmentType,
-    decimal SenderLatitude,
-    decimal SenderLongitude,
-    decimal ReceiverLatitude,
-    decimal ReceiverLongitude);
+    AttachmentType? AttachmentType);
 
 public record UpdateMessageRequestDto(string Text, string? AttachmentUrl, AttachmentType? AttachmentType);

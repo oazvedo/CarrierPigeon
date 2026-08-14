@@ -10,5 +10,6 @@ namespace BirdMessage.Application.Services.Interface
         Task<Address> CreateAsync(Address address, CancellationToken cancellationToken = default);
         Task UpdateAsync(Address address, CancellationToken cancellationToken = default);
         Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
+        Task<Address?> GetLatestByUserIdAsync(Guid userId, CancellationToken cancellationToken = default);
     }
 }

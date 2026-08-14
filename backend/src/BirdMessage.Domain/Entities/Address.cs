@@ -12,5 +12,6 @@ namespace BirdMessage.Domain.Entities
         public string? State { get; set; }
         public string? Region { get; set; }
         public string? DDD { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

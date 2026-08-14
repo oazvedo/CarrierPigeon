@@ -30,11 +30,7 @@ public static class MessageMapper
             ReceiverId = dto.ReceiverId,
             Text = dto.Text,
             AttachmentUrl = dto.AttachmentUrl,
-            AttachmentType = dto.AttachmentType,
-            SenderLatitude = dto.SenderLatitude,
-            SenderLongitude = dto.SenderLongitude,
-            ReceiverLatitude = dto.ReceiverLatitude,
-            ReceiverLongitude = dto.ReceiverLongitude
+            AttachmentType = dto.AttachmentType
         };
 
     public static void ApplyTo(this UpdateMessageRequestDto dto, Message message)
