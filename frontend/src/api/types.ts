@@ -44,6 +44,34 @@ export interface UpdateBirdRequest {
   velocity: number;
 }
 
+export type AttachmentType = "Photo" | "File";
+
+export interface MessageResponse {
+  id: string;
+  senderId: string;
+  receiverId: string;
+  text: string;
+  attachmentUrl: string | null;
+  attachmentType: AttachmentType | null;
+  senderLatitude: number;
+  senderLongitude: number;
+  receiverLatitude: number;
+  receiverLongitude: number;
+  createdAt: string;
+}
+
+export interface CreateMessageRequest {
+  senderId: string;
+  receiverId: string;
+  text: string;
+  attachmentUrl: string | null;
+  attachmentType: AttachmentType | null;
+  senderLatitude: number;
+  senderLongitude: number;
+  receiverLatitude: number;
+  receiverLongitude: number;
+}
+
 export interface PaginatedResult<T> {
   items: T[];
   page: number;

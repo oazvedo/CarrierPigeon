@@ -9,6 +9,6 @@ namespace BirdMessage.Application.Services.Interface
         Task<PaginatedResult<Message>> GetPagedAsync(int page, int pageSize, CancellationToken cancellationToken = default);
         Task<Message> CreateAsync(Message message, CancellationToken cancellationToken = default);
         Task UpdateAsync(Message message, CancellationToken cancellationToken = default);
-        Task DeleteAsync(Message message, CancellationToken cancellationToken = default);
+        Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
     }
 }
