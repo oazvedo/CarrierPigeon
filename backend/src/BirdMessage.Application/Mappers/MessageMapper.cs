@@ -21,6 +21,8 @@ public static class MessageMapper
             message.ReceiverLongitude,
             message.Distance,
             message.EstimatedDeliveryMinutes,
+            message.Status,
+            message.DeliveredAt,
             message.CreatedAt);
 
     public static PaginatedResult<MessageResponseDto> ToResponseDto(this PaginatedResult<Message> result)
