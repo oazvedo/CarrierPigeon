@@ -16,6 +16,8 @@ public record MessageResponseDto(
     decimal ReceiverLongitude,
     decimal Distance,
     decimal EstimatedDeliveryMinutes,
+    MessageStatus Status,
+    DateTime? DeliveredAt,
     DateTime CreatedAt);
 
 public record CreateMessageRequestDto(

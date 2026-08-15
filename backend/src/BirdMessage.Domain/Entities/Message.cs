@@ -17,5 +17,7 @@ public class Message
     public decimal ReceiverLongitude { get; set; }
     public decimal Distance { get; set; }
     public decimal EstimatedDeliveryMinutes { get; set; }
+    public MessageStatus Status { get; set; } = MessageStatus.InTransit;
+    public DateTime? DeliveredAt { get; set; }
     public DateTime CreatedAt {get; set;}
 }

@@ -24,6 +24,8 @@ public class MessageConfiguration : IEntityTypeConfiguration<Message>
         builder.Property(m => m.ReceiverLongitude).HasColumnName("receiver_longitude").HasPrecision(9, 6);
         builder.Property(m => m.Distance).HasColumnName("distance").HasPrecision(10, 2);
         builder.Property(m => m.EstimatedDeliveryMinutes).HasColumnName("estimated_delivery_minutes").HasPrecision(10, 2);
+        builder.Property(m => m.Status).HasColumnName("status");
+        builder.Property(m => m.DeliveredAt).HasColumnName("delivered_at");
         builder.Property(m => m.CreatedAt).HasColumnName("created_at");
     }
 }

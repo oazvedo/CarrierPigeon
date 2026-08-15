@@ -12,7 +12,8 @@ namespace BirdMessage.Application.Services
         IAddressService addressService,
         IGeocodingService geocodingService,
         IBirdService birdService,
-        IDeliveryEstimationService deliveryEstimationService) : IMessageService
+        IDeliveryEstimationService deliveryEstimationService,
+        IMessageTrackingPublisher messageTrackingPublisher) : IMessageService
     {
         public Task<Message?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
             => messageRepository.GetByIdAsync(id, cancellationToken);
@@ -49,6 +50,10 @@ namespace BirdMessage.Application.Services
 
             await messageRepository.AddAsync(message, cancellationToken);
             await messageRepository.SaveChangesAsync(cancellationToken);
+
+            if (message.EstimatedDeliveryMinutes > 0)
+                await messageTrackingPublisher.PublishAsync(message, cancellationToken);
+
             return message;
         }
 
